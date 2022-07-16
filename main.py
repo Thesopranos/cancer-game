@@ -272,11 +272,12 @@ class Core:
         if self.key[pygame.K_ESCAPE]:
             return 0
 
-        # silinecek
+        """ 
         if self.key[pygame.K_d]:
             self.player_X += 10
         elif self.key[pygame.K_a]:
             self.player_X -= 10
+        """
 
         self.draw()
 
