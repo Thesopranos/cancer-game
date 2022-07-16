@@ -1,7 +1,9 @@
 import pygame
 from random import randint
-pygame.init()
+
 import time
+
+pygame.init()
 
 class Core:
     def __init__(self):
@@ -124,78 +126,133 @@ class Core:
                            pygame.image.load("img/tumor-cell/tumor-spam/tumor-spam-30.png"),
                            pygame.image.load("img/tumor-cell/tumor-spam/tumor-spam-31.png")]
 
+        self.protein = pygame.image.load("img/protein/protein2.png")
+        self.neoantijen = pygame.image.load("img/protein/neoantijen2.png")
+        self.protein_liste = [] # [[x1,y1], [x2,y2], ..., [x5,y5]]
+        self.neoantijen_liste = [] # [[x1,y1], [x2,y2], ..., [x5,y5]]
+        
     def normal_spam_free_animation(self, coo1, coo2):
-
+        
+        
         if self.spam_normal1:
+            if self.normal1_animation_counter == int(len(self.normal_spam)/2) * self.normal_animation_speed:
+                self.protein_liste.append([coo1 + 35,coo2 + 35])
+            
             if self.normal1_animation_counter == len(self.normal_spam) * self.normal_animation_speed:
                 self.normal1_animation_counter = 0
                 self.spam_normal1 = False
-
+                
+                
             self.window.blit(self.normal_spam[int(self.normal1_animation_counter // self.normal_animation_speed)],(coo1, coo2))
 
-        elif self.normal_spam_animation_counter == 0:
+        elif self.normal_spam_animation_counter == 0 and len(self.protein_liste) < 5:
             if self.normal1_animation_counter == len(self.normal_free) * self.normal_animation_speed:
                 self.normal1_animation_counter = 0
                 self.spam_normal1 = True
 
             self.window.blit(self.normal_free[int(self.normal1_animation_counter // self.normal_animation_speed)],(coo1, coo2))
+        else:
+            if self.normal1_animation_counter == len(self.normal_free) * self.normal_animation_speed:
+                self.normal1_animation_counter = 0
+                
+            self.window.blit(self.normal_free[int(self.normal1_animation_counter // self.normal_animation_speed)],(coo1, coo2))
 
         self.normal1_animation_counter += 1
 
         if self.spam_normal2:
+            if self.normal2_animation_counter == int(len(self.normal_spam)/2) * self.normal_animation_speed:
+                self.protein_liste.append([coo1 + 285,coo2 + 35])
+                
             if self.normal2_animation_counter == len(self.normal_spam) * self.normal_animation_speed:
                 self.normal2_animation_counter = 0
                 self.spam_normal2 = False
+                
+            self.window.blit(self.normal_spam[int(self.normal2_animation_counter // self.normal_animation_speed)],(coo1 + 250, coo2))
 
-            self.window.blit(self.normal_spam[int(self.normal2_animation_counter // self.normal_animation_speed)],(coo1+ 250, coo2))
-
-        elif self.normal_spam_animation_counter == 0:
+        elif self.normal_spam_animation_counter == 0 and len(self.protein_liste) < 5:
             if self.normal2_animation_counter == len(self.normal_free) * self.normal_animation_speed:
                 self.normal2_animation_counter = 0
                 self.spam_normal2 = True
 
             self.window.blit(self.normal_free[int(self.normal2_animation_counter // self.normal_animation_speed)],(coo1+ 250, coo2))
+        else:
+            if self.normal2_animation_counter == len(self.normal_free) * self.normal_animation_speed:
+                  self.normal2_animation_counter = 0
+                  
+            self.window.blit(self.normal_free[int(self.normal2_animation_counter // self.normal_animation_speed)],(coo1+ 250, coo2))
 
         self.normal2_animation_counter += 1
 
         if self.spam_tumor1:
+            if self.tumor1_animation_counter == int(len(self.tumor_spam)/2) * self.tumor_animation_speed:
+                self.neoantijen_liste.append([coo1 + 165,coo2 + 30])
+                
             if self.tumor1_animation_counter == len(self.tumor_spam) * self.tumor_animation_speed:
                 self.tumor1_animation_counter = 0
                 self.spam_tumor1 = False
-
+                
             self.window.blit(self.tumor_spam[int(self.tumor1_animation_counter // self.tumor_animation_speed)],(coo1 + 140, coo2))
 
-        elif self.tumor_spam_animation_counter == 0:
+        elif self.tumor_spam_animation_counter == 0 and len(self.neoantijen_liste) < 5:
             if self.tumor1_animation_counter == len(self.tumor_free) * self.tumor_animation_speed:
                 self.tumor1_animation_counter = 0
                 self.spam_tumor1 = True
 
             self.window.blit(self.tumor_free[int(self.tumor1_animation_counter // self.tumor_animation_speed)],(coo1 + 140, coo2))
-
-        print(self.tumor1_animation_counter, self.spam_tumor1)
+        else:
+            if self.tumor1_animation_counter == len(self.tumor_free) * self.tumor_animation_speed:
+                self.tumor1_animation_counter = 0
+                
+            self.window.blit(self.tumor_free[int(self.tumor1_animation_counter // self.tumor_animation_speed)],(coo1 + 140, coo2))
+        
         self.tumor1_animation_counter += 1
 
         if self.spam_tumor2:
+            if self.tumor2_animation_counter == int(len(self.tumor_spam)/2) * self.tumor_animation_speed:
+                self.neoantijen_liste.append([coo1 + 415,coo2 + 30])
+                
             if self.tumor2_animation_counter == len(self.tumor_spam) * self.tumor_animation_speed:
                 self.tumor2_animation_counter = 0
                 self.spam_tumor2 = False
-
+                
             self.window.blit(self.tumor_spam[int(self.tumor2_animation_counter // self.tumor_animation_speed)],(coo1 + 390, coo2))
 
-        elif self.tumor_spam_animation_counter == 0:
+        elif self.tumor_spam_animation_counter == 0 and len(self.neoantijen_liste) < 5:
             if self.tumor2_animation_counter == len(self.tumor_free) * self.tumor_animation_speed:
                 self.tumor2_animation_counter = 0
                 self.spam_tumor2 = True
 
             self.window.blit(self.tumor_free[int(self.tumor2_animation_counter // self.tumor_animation_speed)],(coo1 + 390, coo2))
-
-        print(self.tumor2_animation_counter, self.spam_tumor2)
+        else:
+            if self.tumor2_animation_counter == len(self.tumor_free) * self.tumor_animation_speed:
+                  self.tumor2_animation_counter = 0
+                  
+            self.window.blit(self.tumor_free[int(self.tumor2_animation_counter // self.tumor_animation_speed)],(coo1 + 390, coo2))
+            
         self.tumor2_animation_counter += 1
+        
     def draw(self):
 
 
         self.window.blit(self.background, (0,0))
 
+        sayac = 0
+        
+        for i in self.protein_liste:
+            self.window.blit(self.protein, (i[0], i[1]))
+            if i[1] > 720:
+                self.protein_liste.pop(sayac)
+            self.protein_liste[sayac][1] += 3
+            sayac += 1
+        
+        sayac = 0
+        for i in self.neoantijen_liste:
+            self.window.blit(self.neoantijen, (i[0], i[1]))
+            if i[1] > 720:
+                self.neoantijen_liste.pop(sayac)
+            self.neoantijen_liste[sayac][1] += 3
+            sayac += 1
+            
         self.normal_spam_free_animation(coo1 = 0, coo2 = 0)
 
         self.window.blit(self.player, (self.player_X, self.player_Y))
