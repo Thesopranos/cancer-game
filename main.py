@@ -13,12 +13,7 @@ class Core:
         pygame.display.set_caption("Kare Yakala")
         self.clock = pygame.time.Clock()
 
-        self.enemy = pygame.image.load("img/enemy.png")
         self.background = pygame.image.load("img/background.png")
-
-        self.player = pygame.image.load("img/player.png")
-        self.player_X = 250
-        self.player_Y = 600
 
         self.spam_normal1 = False
         self.spam_normal2 = True
@@ -254,8 +249,6 @@ class Core:
             sayac += 1
             
         self.normal_spam_free_animation(coo1 = 0, coo2 = 0)
-
-        self.window.blit(self.player, (self.player_X, self.player_Y))
 
         self.clock.tick(60)
 
